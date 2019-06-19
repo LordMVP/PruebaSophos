@@ -1,6 +1,6 @@
 # SophosFredyvega
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+this project was created in the language of angular development 7, with the purpose of observing the skills as a developer in said language
 
 ## Development server
 
@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Authors 
+
+Project developed by Freddy Vega, full stack developer
