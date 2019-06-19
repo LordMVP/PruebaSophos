@@ -1,0 +1,146 @@
+<div id="content" style="background-color: white;">
+  <hr>
+  <div class="row">
+    <h4>Pedidos <small>Información Cliente</small></h4>
+    <form [formGroup]="formGroup">
+      <div class="row text-center" style="padding-bottom: 20px; padding-top: 20px;" *ngIf="alertMessage != ''">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <ngb-alert [type]="alertType" (close)="closeAlert()"><strong>{{ alertMessage }}</strong></ngb-alert>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-10 offset-md-1">
+          <div class="row"><br></div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="nombre">
+              <strong>Nombre</strong>
+              <strong id="strongRequired" class="">(*)</strong></label>
+            <div class="col-sm-9">
+              <input class="form-control" formControlName="nombre" [(ngModel)]='radicado.nombre' id="nombre"
+                type="text">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="fechaNacimiento">
+              <strong>Fecha Nacimiento</strong>
+              <strong id="strongRequired" class="">(*)</strong></label>
+            <div class="col-sm-9">
+              <input class="form-control" formControlName="fechaNacimiento" [(ngModel)]='radicado.fechaNacimiento'
+                id="fechaNacimiento" type="date">
+            </div>
+          </div>
+          <div class="form-group row"><label class="col-sm-3 col-form-label" for="usuarioNumero">
+              <strong> Ciudad</strong><strong id="strongRequired">(*)</strong></label>
+            <div class="col-sm-9">
+              <select class="form-control" [(ngModel)]='radicado.ciudad' formControlName="ciudad" required>
+                <option selected>Seleccione Solicitud</option>
+                <option value="Bogota">Bogotá</option>
+                <option value="Soacha">Soacha</option>
+                <option value="Girardot">Girardot</option>
+                <option value="Funza">Funza</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="direccion">
+              <strong>Dirección</strong>
+              <strong id="strongRequired" class="">(*)</strong></label>
+            <div class="col-sm-9">
+              <input class="form-control" formControlName="direccion" [(ngModel)]='radicado.direccion' id="direccion"
+                type="text">
+            </div>
+          </div>
+          <div class="form-group row "><label class="col-sm-3 col-form-label" for="documentFile">
+              <strong>Documento</strong>
+              <strong id="strongRequired" class="">(*)</strong></label>
+            <div class="col-sm-9 custom-file">
+              <input accept="application/pdf" (change)="addFiles($event.target.files, 'documento')"
+                class="custom-file-input" formControlName="archivo" [(ngModel)]='radicado.archivo' id="archivo"
+                name="archivo" type="file">
+              <label class="custom-file-label" for="customFile" id="documentoLabel">Selecciona
+                Archivo</label>
+            </div>
+            <small>Recuerde que el documento a cargar debe ser PDF y no debe exceder los 1
+              Megas.</small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <hr>
+  <div class="row">
+    <h4>Pedidos <small>Información Productos</small></h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="7" class="text-center">
+              <strong>
+                Catalogo
+              </strong>
+            </th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Categoria</th>
+            <th>Cantidad</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad Seleccionada</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let producto of listProductos; let i = index">
+            <tr *ngIf="producto.cantidadDisponible > 0">
+              <td><a href="#" data-toggle="modal" [attr.data-target]="'#productoModal'+i">
+                  <img class="media-object" [src]="producto.miniatura" data-holder-rendered="true"
+                    style="width: 64px; height: 64px;">
+                </a></td>
+              <td>{{producto.idProducto}}</td>
+              <td>{{producto.categoria}}</td>
+              <td>{{producto.cantidadDisponible}}</td>
+              <td>{{producto.descripcion }}</td>
+              <td>{{producto.precio}}</td>
+              <td><input type="number" id="producto{{producto.idProducto}}" min="0"
+                  max="{{producto.cantidadDisponible}}" name="producto{{producto.idProducto}}"
+                  [(ngModel)]="radicado.listaProductos[i].cantidad" required></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="row" style="margin-left: auto; margin-right: auto;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+      <div class="col text-right">
+        <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!formGroup.valid">Siguiente</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="productoModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" *ngFor="let producto of listProductos; let i = index">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{producto.descripcion}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{{producto.imagen}}" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="jumbotron">
+  <div class="row">
+    <pre>radicado: {{ radicado | json }}</pre>
+  </div>
+</div> -->

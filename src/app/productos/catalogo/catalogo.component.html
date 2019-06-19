@@ -1,0 +1,60 @@
+<div id="content" style="background-color: white;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="7" class="text-center">
+                <strong>
+                  Catalogo
+                </strong>
+              </th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>#</th>
+              <th>Id Producto</th>
+              <th>Categoria</th>
+              <th>Cantidad</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of listProductos; let i = index">
+              <td><a href="#" data-toggle="modal" [attr.data-target]="'#productoModal'+i">
+                  <img class="media-object" [src]="producto.miniatura" data-holder-rendered="true"
+                    style="width: 64px; height: 64px;">
+                </a></td>
+              <td>{{ i + 1 }}</td>
+              <td>{{producto.idProducto}}</td>
+              <td>{{producto.categoria}}</td>
+              <td>{{producto.cantidadDisponible}}</td>
+              <td>{{producto.descripcion }}</td>
+              <td>{{producto.precio}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="productoModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" *ngFor="let producto of listProductos; let i = index">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{producto.descripcion}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{{producto.imagen}}" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>

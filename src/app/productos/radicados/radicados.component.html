@@ -1,0 +1,43 @@
+<div id="content" style="background-color: white;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive" style="height: 400px;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="7" class="text-center">
+                <strong>
+                  Radicados
+                </strong>
+              </th>
+            </tr>
+            <tr>
+              <th>Id</th>
+              <th>nombre</th>
+              <th>Fecha Nacimiento</th>
+              <th>Ciudad</th>
+              <th>Direccion</th>
+              <th>Archivo</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody style="height: 200px">
+            <tr *ngFor="let radicado of listRadicado; let i = index">
+              <td>{{radicado.id}}</td>
+              <td>{{radicado.nombre}}</td>
+              <td>{{radicado.fechaNacimiento}}</td>
+              <td>{{radicado.ciudad }}</td>
+              <td>{{radicado.direccion}}</td>
+              <td>{{radicado.archivo}}</td>
+              <td>
+                <div class="btn-group btn-group-toggle">
+                  <button class="btn btn-danger" title="Eliminar" (click)="onDeleteRadicado(i)"></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

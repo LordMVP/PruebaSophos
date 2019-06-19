@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  endPointCatalogo: "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos",
+  sizeFile: 1048000
 };
 
 /*
