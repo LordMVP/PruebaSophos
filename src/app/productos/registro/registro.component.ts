@@ -66,7 +66,7 @@ export class RegistroComponent implements OnInit {
 
     this.listRadicado.sort();
 
-    this.radicado.id = this.listRadicado[this.listRadicado.length - 1].id + 1;
+    this.radicado.id = this.listRadicado.length > 0 ? (this.listRadicado[this.listRadicado.length - 1].id + 1) : 1;
 
     if (this.radicado.listaProductos != null) {
       this.radicado.listaProductos.forEach(it => {
